@@ -8,7 +8,7 @@ const SearchQuery = () => {
         name="search"
         id="search"
         placeholder="Search for a movie, tv show, person......."
-        className="w-full px-5 rounded-full text-black"
+        className="w-full px-5 rounded-full text-black bg-white"
       />
       <button className="px-8 py-3 bg-gradient-to-l from-[#00A3E1] to-[#1BD1AF] rounded-full">
         Search

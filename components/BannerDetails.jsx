@@ -1,8 +1,6 @@
 import SearchQuery from "./SearchQuery";
-
 const BannerDetails = ({ movie }) => {
   const { poster_path } = movie;
-  console.log(poster_path)
   return (
     <div>
       <div
