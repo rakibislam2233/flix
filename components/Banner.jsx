@@ -1,10 +1,10 @@
-import { getPopularMovies } from "@/lib/api";
+import {getTopRatedMovies } from "@/lib/api";
 import Carasoul from "./Carasoul";
 import BannerDetails from "./BannerDetails";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 const Banner = async () => {
-  const movies = await getPopularMovies();;
+  const movies = await getTopRatedMovies();;
   return (
     <div className="w-full">
       <Carasoul>

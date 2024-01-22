@@ -15,7 +15,7 @@ const Header = () => {
             <div className="w-14 h-5 bg-gradient-to-l from-[#00A3E1] to-[#1BD1AF] rounded-full"></div>
           </li>
           <li className="relative">
-            <Link href={"/"}>Movies</Link>
+            <Link href={"/movie"}>Movies</Link>
             <ul
               className={`w-40 absolute top-8 left-0 right-0 bg-slate-500 p-5 flex flex-col gap-2 rounded transition-opacity duration-300 opacity-0`}
             >

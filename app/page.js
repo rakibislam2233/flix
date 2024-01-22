@@ -1,14 +1,20 @@
 import Banner from "@/components/Banner";
-import Progress from "@/components/Progress";
+import JoinToday from "@/components/JoinToday";
+import LatestTrailers from "@/components/LatestTrailers";
+import LeaderBoard from "@/components/LeaderBoard";
 import Trending from "@/components/Trending";
+import WhatsPopular from "@/components/WhatsPopular";
 
 const Home = () => {
   
   return (
     <>
       <Banner />
-      {/* <Progress progress={10}/> */}
       <Trending/>
+      <LatestTrailers/>
+      <WhatsPopular/>
+      <JoinToday/>
+      <LeaderBoard/>
     </>
   );
 };

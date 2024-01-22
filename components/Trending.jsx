@@ -24,10 +24,10 @@ const Trending = () => {
   }, [fetchData]);
 
   return (
-    <div className="w-full px-8 py-10">
-      <div className="flex gap-4 pb-5">
+    <div className="w-full px-8 py-5">
+      <div className="flex items-center gap-4 pb-5">
         <h1 className="text-2xl font-semibold ">Trending</h1>
-        <div className="border rounded-full flex justify-between items-center">
+        <div className="border border-[#032541] rounded-full flex justify-between items-center">
           <button
             onClick={() => setStatus("today")}
             className={`px-6 py-1 rounded-full text-gray-950 font-semibold ${
@@ -66,7 +66,7 @@ const Trending = () => {
           </button>
         </div>
       </div>
-      <Carasoul2>
+      <Carasoul2 slide={2} smSlide={4} mdSlide={6} lgSlide={8}>
         {trendingMovies?.slice(0, 10)?.map((trendingMovie) => (
           <MovieCard key={trendingMovie.id} movie={trendingMovie} />
         ))}
