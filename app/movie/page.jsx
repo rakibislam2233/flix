@@ -1,11 +1,29 @@
+"use client";
 import Accordion from "@/components/Accordion";
 import MovieCard from "@/components/MovieCard";
-import { getGenresMovies, getPopularMovies } from "@/lib/api";
-
-const Movie = async () => {
-  const popularMovies = await getPopularMovies();
-  const genres = await getGenresMovies();
-  console.log(genres);
+import { getGenresMovies, getDiscoverMovies } from "@/lib/api";
+import { useEffect, useState } from "react";
+const Movie = () => {
+  const [page, setPage] = useState(1);
+  const [popularMovies, setPopularMovies] = useState([]);
+  const [sortMovies, setSortMovies] = useState("popularity.desc");
+  const [genres, setGenres] = useState([]);
+  const fetchPopularMovies = async (page, sortMovies) => {
+    const movies = await getDiscoverMovies(page, sortMovies);
+    setPopularMovies(movies);
+  };
+  const fetchGenres = async () => {
+    const genresData = await getGenresMovies();
+    setGenres(genresData);
+  };
+  useEffect(() => {
+    fetchPopularMovies(page, sortMovies);
+    fetchGenres();
+  }, [page, sortMovies]);
+  const handleSortChange = (event) => {
+    const selectedSortOption = event.target.value;
+    setSortMovies(selectedSortOption);
+  };
   return (
     <div className="w-full h-full grid grid-cols-1 md:grid-cols-12 px-8 py-5 gap-8">
       <div className="col-span-full md:col-span-3">
@@ -15,25 +33,23 @@ const Movie = async () => {
             <div className="px-4 py-2">
               <h1 className="pb-2">Sort Results By</h1>
               <select
-                name=""
-                id=""
+                name="sortOptions"
+                id="sortOptions"
                 className="px-3 py-2 rounded border space-y-2 focus:outline-none bg-gray-200"
+                onChange={handleSortChange}
+                value={sortMovies}
               >
-                <option value="popularityAscending">
-                  Popularity Ascending
-                </option>
-                <option value="popularityDecending">
-                  Popularity Decending
-                </option>
-                <option value="ratingAscending">Rating Ascending</option>
-                <option value="ratingDecending">Rating Decending</option>
-                <option value="releaseDateAscending">
+                <option value="popularity.asc">Popularity Ascending</option>
+                <option value="popularity.desc">Popularity Descending</option>
+                <option value="vote_average.asc">Rating Ascending</option>
+                <option value="vote_average.desc">Rating Descending</option>
+                <option value={"release_date.asc"}>
                   Release Date Ascending
                 </option>
-                <option value="releaseDateDecending">
+                <option value={"release_date.desc"}>
                   Release Date Decending
                 </option>
-                <option value="releaseDateDecending">{`Title (A-Z)`}</option>
+                <option>{`Title (A-Z)`}</option>
               </select>
             </div>
           </Accordion>
@@ -49,7 +65,7 @@ const Movie = async () => {
                 </div>
                 <div className="flex gap-1 items-center">
                   <div className="w-4 h-4 border rounded-full"></div>
-                  <span>Movies I Haven't Seen</span>
+                  <span>Movies I Haven t Seen</span>
                 </div>
                 <div className="flex gap-1 items-center">
                   <div className="w-4 h-4 border rounded-full"></div>
@@ -119,10 +135,18 @@ const Movie = async () => {
           </button>
         </div>
       </div>
-      <div className="col-span-full md:col-span-9 w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        {popularMovies?.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
-        ))}
+      <div className="col-span-full md:col-span-9 ">
+        <div className="w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {popularMovies?.map((movie) => (
+            <MovieCard key={movie.id} movie={movie} />
+          ))}
+        </div>
+        <button
+          onClick={() => setPage(page + 1)}
+          className="w-full px-5 py-2 bg-cyan-500 rounded-full text-white font-semibold"
+        >
+          Load More
+        </button>
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <div className="w-full bg-[#031F37] px-10 py-20 ">
-      <div className=" max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 text-white">
+      <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-5 text-white">
         <div>
           <h1 className="text-4xl font-bold tracking-[5px] text-transparent bg-gradient-to-l from-[#00A3E1] to-[#1BD1AF] bg-clip-text ">
             Flix

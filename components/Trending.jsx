@@ -25,7 +25,7 @@ const Trending = () => {
 
   return (
     <div className="w-full px-8 py-5">
-      <div className="flex items-center gap-4 pb-5">
+      <div className="flex items-center gap-4 pb-5 flex-wrap">
         <h1 className="text-2xl font-semibold ">Trending</h1>
         <div className="border border-[#032541] rounded-full flex justify-between items-center">
           <button

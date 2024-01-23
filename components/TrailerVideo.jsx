@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { BsThreeDots, BsX } from "react-icons/bs";
 import ReactPlayer from "react-player";
+import Modal from "./Modal";
+import { FaPlay } from "react-icons/fa";
 
 const TrailerVideo = ({ movie }) => {
   const { id, title, poster_path } = movie;
@@ -21,36 +23,30 @@ const TrailerVideo = ({ movie }) => {
       console.error("Error searching TMDb:", error);
     }
   };
-
-  const closeYoutubeVideo = () => {
-    setIsOpen(false);
-  };
-
   return (
-    <div className="relative w-full p-2 space-y-2">
+    <div className="w-full p-2 space-y-2 hover:scale-105 transition-all duration-300">
       <div className="relative">
         <img
-          className="w-full h-56 rounded-xl cursor-pointer"
+          className="w-full h-56 rounded-xl"
           src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
           alt=""
-          onClick={searchYoutubeVideo}
         />
         <div
           className="absolute top-3 right-3 w-5 h-5 bg-gray-400 hover:bg-[#07B4E2] rounded-full flex justify-center items-center cursor-pointer"
-          onClick={searchYoutubeVideo}
         >
           <BsThreeDots className="text-gray-700" />
         </div>
+        <div className="absolute w-full h-full top-0 right-0 left-0 flex justify-center items-center">
+          <button onClick={searchYoutubeVideo}><FaPlay className="w-10 h-10 text-white group-hover:text-5xl"/></button>
+        </div>
       </div>
       <h1 className="font-semibold text-xl text-white text-center">{title}</h1>
-      {isOpen && (
-        <div className="flex justify-center items-center">
-          <ReactPlayer
-            url={`https://www.youtube.com/watch?v=${video}`}
-            controls
-          />
-        </div>
-      )}
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} title={title}>
+        <ReactPlayer
+          url={`https://www.youtube.com/watch?v=${video}`}
+          controls
+        />
+      </Modal>
     </div>
   );
 };

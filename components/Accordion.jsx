@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { FaCaretRight } from "react-icons/fa";
 const Accordion = ({ title, children }) => {
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(true);
 
   const handleClick = () => {
     setIsActive(!isActive);
